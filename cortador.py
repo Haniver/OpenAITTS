@@ -3,8 +3,11 @@ import re  # importación agregada para procesamiento de patrones
 
 def split_text_file(input_file):
     max_chars = 4096  # Límite máximo de caracteres
-
-    with open(input_file, 'r', encoding='utf-8') as f:
+    
+    # Construir la ruta completa al archivo en txt_input/
+    input_path = os.path.join('txt_input', input_file)
+    
+    with open(input_path, 'r', encoding='utf-8') as f:
         text = f.read()
 
     sentences = text.split('.')
@@ -36,11 +39,15 @@ def split_text_file(input_file):
             else:
                 processed_lines.append(line)
         chunk = "\n".join(processed_lines)
-        output_file = f"{base_name} - {i:02d}{ext}"
+        output_file = f"txt_blocks/{base_name}/{base_name} - {i:03d}{ext}"
+        
+        # Crear el directorio si no existe
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+        
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(chunk)
         print(f"Archivo creado: {output_file}")
 
 if __name__ == "__main__":
-    input_file = input("Por favor, introduce el nombre del archivo de entrada (e.g., 'source.txt'): ")
+    input_file = input("Por favor, introduce el nombre del archivo de entrada (sin ruta, ejemplo: 'source.txt'): ")
     split_text_file(input_file)

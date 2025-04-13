@@ -17,7 +17,7 @@ base_name, ext = os.path.splitext(source_file)
 current_number = start_number
 
 while True:
-    input_file_name = f"{base_name} - {current_number:02d}{ext}"
+    input_file_name = f"txt_blocks/{base_name}/{base_name} - {current_number:03d}{ext}"
     if not Path(input_file_name).exists():
         print(f"El archivo {input_file_name} no existe. Proceso terminado.")
         break
@@ -25,7 +25,7 @@ while True:
         text = f.read()
 
     # Establecer el nombre del archivo MP3 de salida
-    speech_file_path = Path(__file__).parent / f"{base_name} - {current_number:02d}.mp3"
+    speech_file_path = Path(__file__).parent / f"mp3_blocks/{base_name}/{base_name} - {current_number:03d}.mp3"
 
     # Crear el discurso
     response = client.audio.speech.create(

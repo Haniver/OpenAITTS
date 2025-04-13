@@ -3,7 +3,8 @@ import os
 
 def merge_mp3_files(base_name):
     # Obtener todos los archivos que coinciden con el nombre base
-    files = [f for f in os.listdir() if f.startswith(base_name) and f.endswith('.mp3')]
+    directory = f"mp3_blocks/{base_name}/"
+    files = [f for f in os.listdir(directory) if f.startswith(base_name) and f.endswith('.mp3')]
     files.sort()  # Ordenar los archivos por nombre
 
     # Crear un objeto AudioSegment vacío
@@ -11,7 +12,7 @@ def merge_mp3_files(base_name):
 
     # Combinar todos los archivos
     for file in files:
-        audio = AudioSegment.from_mp3(file)
+        audio = AudioSegment.from_mp3(f"{directory}{file}")
         combined += audio
 
     # Exportar el archivo combinado

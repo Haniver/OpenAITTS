@@ -2,3 +2,7 @@
 *.txt
 venv/
 credenciales.py
+mp3_output/*
+txt_blocks/*
+txt_input/*
+mp3_blocks/*
